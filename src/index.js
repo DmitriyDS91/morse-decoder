@@ -35,10 +35,30 @@ const MORSE_TABLE = {
     '---..':  '8',
     '----.':  '9',
     '-----':  '0',
+    '*****':  ' ',
 };
 
 function decode(expr) {
-    // write your solution here
+    let string = expr.toString(); 
+    let morseSymbol = '';
+    let result = '';
+     for (let i = 0; i < string.length; i = i + 10) {
+        for (let j = 0; j < 10; j = j + 2) {
+            if ((string[i + j] == '1') && (string[i + j + 1] == '0')) {
+                morseSymbol = `${morseSymbol}.`;
+            }
+            if ((string[i + j] == '1') && (string[i + j + 1] == '1')) {
+                morseSymbol = `${morseSymbol}-`;
+            }
+            if ((string[i + j] == '*') && (string[i + j + 1] == '*')) {
+                morseSymbol = `${morseSymbol}*`;
+            }
+        }
+        result = `${result}${MORSE_TABLE[morseSymbol]}`;
+        morseSymbol = '';
+    }
+
+    return result;
 }
 
 module.exports = {
